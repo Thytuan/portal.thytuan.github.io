@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Digital - Thytuan</title>
+    <link rel="icon" type="image/jpeg" href="https://img.freepik.com/vecteurs-premium/fond-concept-cybersecurite-bleu-carte-du-monde_42077-269.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #00ffaa;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Effet de particules/bulles montantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(0,255,170,0.8) 0%, rgba(0,255,170,0.3) 50%, transparent 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-up linear infinite;
+        }
+        
+        @keyframes float-up {
+            from {
+                transform: translateY(110vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        /* Grille cybernétique */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,255,170,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,170,0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            animation: gridPulse 6s ease-in-out infinite;
+        }
+        
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.1; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Contenu principal */
+        .main-content {
+            flex: 1;
+        }
+        
+        /* Section Hero */
+        .hero-section {
+            margin-bottom: 80px;
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 40px;
+            background: linear-gradient(45deg, #00ffaa, #00ccff);
+            padding: 6px;
+            position: relative;
+            animation: profileGlow 4s ease-in-out infinite;
+            box-shadow: 
+                0 0 40px rgba(0,255,170,0.6),
+                0 0 80px rgba(0,255,170,0.3),
+                0 0 120px rgba(0,255,170,0.1);
+        }
+        
+        .profile-image img {
+            width: calc(100% - 12px);
+            height: calc(100% - 12px);
+            border-radius: 50%;
+            object-fit: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes profileGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 40px rgba(0,255,170,0.6),
+                    0 0 80px rgba(0,255,170,0.3),
+                    0 0 120px rgba(0,255,170,0.1);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 60px rgba(0,255,170,0.8),
+                    0 0 120px rgba(0,255,170,0.5),
+                    0 0 180px rgba(0,255,170,0.2);
+                transform: scale(1.05);
+            }
+        }
+        
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #00ffaa;
+            text-shadow: 
+                0 0 20px rgba(0,255,170,0.8),
+                0 0 40px rgba(0,255,170,0.5),
+                0 0 80px rgba(0,255,170,0.3);
+            animation: textGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 
+                    0 0 20px rgba(0,255,170,0.8),
+                    0 0 40px rgba(0,255,170,0.5),
+                    0 0 80px rgba(0,255,170,0.3);
+            }
+            50% {
+                text-shadow: 
+                    0 0 30px rgba(0,255,170,1),
+                    0 0 60px rgba(0,255,170,0.8),
+                    0 0 120px rgba(0,255,170,0.5);
+            }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #00ffaa;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(0,255,170,0.6);
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            color: #88ffbb;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+            text-shadow: 0 0 10px rgba(0,255,170,0.4);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #00ffaa;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(0,255,170,0.5);
+        }
+        
+        .contact-icon {
+            font-size: 1.4rem;
+            filter: drop-shadow(0 0 8px rgba(0,255,170,0.6));
+        }
+        
+        /* Section titre */
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #00ffaa;
+            text-shadow: 
+                0 0 20px rgba(0,255,170,0.8),
+                0 0 40px rgba(0,255,170,0.5);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00ffaa, transparent);
+            box-shadow: 0 0 10px rgba(0,255,170,0.8);
+        }
+        
+        /* Grilles */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+            justify-items: center;
+        }
+        
+        .custom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            justify-items: center;
+            margin-bottom: 80px;
+        }
+        
+        /* Cartes sociales */
+        .social-card {
+            background: linear-gradient(135deg, rgba(0,255,170,0.1) 0%, rgba(16, 42, 67, 0.4) 100%);
+            border: 2px solid rgba(0,255,170,0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 380px;
+        }
+        
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,170,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .social-card:hover::before {
+            left: 100%;
+        }
+        
+        .social-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: #00ffaa;
+            box-shadow: 
+                0 25px 50px rgba(0,255,170,0.3),
+                0 0 50px rgba(0,255,170,0.4),
+                inset 0 0 30px rgba(0,255,170,0.1);
+        }
+        
+        .social-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+        }
+        
+        .social-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #00ffaa, #00ccff);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 
+                0 0 25px rgba(0,255,170,0.5),
+                inset 0 0 20px rgba(255,255,255,0.1);
+        }
+        
+        .social-icon img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+        
+        .social-info {
+            flex: 1;
+        }
+        
+        .social-info h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #00ffaa;
+            text-shadow: 0 0 15px rgba(0,255,170,0.6);
+        }
+        
+        .social-handle {
+            color: #88ffbb;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 0 0 8px rgba(0,255,170,0.4);
+        }
+        
+        /* Cartes personnalisées */
+        .custom-card {
+            background: linear-gradient(135deg, rgba(0,255,170,0.1) 0%, rgba(16, 42, 67, 0.4) 100%);
+            border: 2px solid rgba(0,255,170,0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .custom-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: #00ffaa;
+            box-shadow: 
+                0 25px 50px rgba(0,255,170,0.3),
+                0 0 50px rgba(0,255,170,0.4);
+        }
+        
+        .custom-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #00ffaa, #00ccff);
+            border-radius: 15px;
+            box-shadow: 
+                0 0 25px rgba(0,255,170,0.5),
+                inset 0 0 20px rgba(255,255,255,0.1);
+            filter: drop-shadow(0 0 15px rgba(0,255,170,0.7));
+        }
+        
+        .custom-icon img {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+        
+        .custom-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #00ffaa;
+            text-shadow: 0 0 15px rgba(0,255,170,0.6);
+        }
+        
+        .custom-description {
+            color: #88ffbb;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-shadow: 0 0 8px rgba(0,255,170,0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 40px 20px;
+            color: #00ffaa;
+            opacity: 0.8;
+            border-top: 1px solid rgba(0,255,170,0.3);
+            text-shadow: 0 0 10px rgba(0,255,170,0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.4rem; }
+            .social-grid, .custom-grid { 
+                grid-template-columns: 1fr; 
+                gap: 25px; 
+            }
+            .container { padding: 30px 20px; }
+            .social-card, .custom-card {
+                max-width: 100%;
+            }
+            .social-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="particles"></div>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- SECTION HERO -->
+            <section class="hero-section">
+                <div class="profile-image">
+                    <img src="https://img.freepik.com/vecteurs-premium/fond-concept-cybersecurite-bleu-carte-du-monde_42077-269.jpg" alt="Thytuan Profile" />
+                </div>
+                <h1 class="hero-title">Thytuan</h1>
+                <h2 class="hero-subtitle">Passionné d'informatique</h2>
+                <p class="hero-description">
+                    Étudiant motivé en Bac Pro CIEL, passionné par l'informatique, les réseaux et le hardware, 
+                    je cherche à développer mes compétences techniques à travers des projets et expériences professionnelles.
+                </p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <span>mail@thytuan.fr</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECTION LIENS PERSONNALISÉS -->
+            <section>
+                <h2 class="section-title">LIENS PERSONNALISÉS</h2>
+                <div class="custom-grid">
+                    
+                    <!-- CV -->
+                    <a href="https://cv.thytuan.fr" class="custom-card" target="_blank" rel="noopener noreferrer">
+                        <div class="custom-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135750.png" alt="CV" />
+                        </div>
+                        <h3 class="custom-title">CV</h3>
+                        <p class="custom-description">
+                           
+                        </p>
+                    </a>
+                    
+                    <!-- NAS ACCESS -->
+                    <a href="http://nas.thytuan.fr" class="custom-card" target="_blank" rel="noopener noreferrer">
+                        <div class="custom-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/512/10633/10633671.png" alt="NAS" />
+                        </div>
+                        <h3 class="custom-title">NAS ACCESS</h3>
+                        <p class="custom-description">
+                            NAS access only for admin.
+                        </p>
+                    </a>
+                </div>
+            </section>
+            
+            <!-- SECTION RÉSEAUX SOCIAUX -->
+            <section>
+                <h2 class="section-title">MES RÉSEAUX</h2>
+                <div class="social-grid">
+                    
+                    <!-- TIKTOK -->
+                    <a href="https://www.tiktok.com/@thytuann" class="social-card" target="_blank" rel="noopener noreferrer">
+                        <div class="social-header">
+                            <div class="social-icon">
+                                <img src="https://www.pngall.com/wp-content/uploads/3/TikTok-PNG-Free-Image.png" alt="TikTok" />
+                            </div>
+                            <div class="social-info">
+                                <h3>TikTok</h3>
+                                <div class="social-handle">@thytuann</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- GITHUB -->
+                    <a href="https://github.com/Thytuan" class="social-card" target="_blank" rel="noopener noreferrer">
+                        <div class="social-header">
+                            <div class="social-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" alt="GitHub" />
+                            </div>
+                            <div class="social-info">
+                                <h3>GitHub</h3>
+                                <div class="social-handle">@Thytuan</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- YOUTUBE -->
+                    <a href="https://www.youtube.com/@Thytuan_youtube" class="social-card" target="_blank" rel="noopener noreferrer">
+                        <div class="social-header">
+                            <div class="social-icon">
+                                <img src="https://images.icon-icons.com/818/PNG/512/Social-14-Youtube-Outline_icon-icons.com_66385.png" alt="YouTube" />
+                            </div>
+                            <div class="social-info">
+                                <h3>YouTube</h3>
+                                <div class="social-handle">@Thytuan_youtube</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- INSTAGRAM -->
+                    <a href="https://www.instagram.com/thytuann/" class="social-card" target="_blank" rel="noopener noreferrer">
+                        <div class="social-header">
+                            <div class="social-icon">
+                                <img src="https://png.pngtree.com/png-clipart/20180626/ourmid/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt="Instagram" />
+                            </div>
+                            <div class="social-info">
+                                <h3>Instagram</h3>
+                                <div class="social-handle">@thytuann</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- DISCORD -->
+                    <a href="#" class="social-card" target="_blank" rel="noopener noreferrer">
+                        <div class="social-header">
+                            <div class="social-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/4/4f/Discord_Logo_sans_texte.svg/1818px-Discord_Logo_sans_texte.svg.png" alt="Discord" />
+                            </div>
+                            <div class="social-info">
+                                <h3>Discord</h3>
+                                <div class="social-handle">thytuan</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>© 2025 Thytuan | Étudiant en Bac Pro CIEL</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Création des particules montantes
+            createFloatingParticles();
+        });
+        
+        function createFloatingParticles() {
+            const particleContainer = document.querySelector('.particles');
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Taille aléatoire entre 3px et 12px
+                const size = Math.random() * 9 + 3;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Position horizontale aléatoire
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                
+                // Durée d'animation aléatoire entre 10 et 20 secondes
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDuration = duration + 's';
+                
+                // Délai aléatoire
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                
+                particleContainer.appendChild(particle);
+                
+                // Supprimer la particule après l'animation
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, (duration + 2) * 1000);
+            }
+            
+            // Créer des particules à intervalles réguliers
+            setInterval(createParticle, 300);
+            
+            // Créer quelques particules immédiatement
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createParticle, i * 200);
+            }
+        }
+    </script>
+</body>
+</html>
